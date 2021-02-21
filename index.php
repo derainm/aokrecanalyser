@@ -84,7 +84,8 @@ $mapImage = $rec->mapImage()
           crossorigin="anonymous">
     <style>
         .Page {
-            width: 800px;
+            width: 1000px;
+            background-color: #cacaca;
         }
 
         .Category {
@@ -148,6 +149,31 @@ $mapImage = $rec->mapImage()
             /* To make colours a bit more bearable: put a 50% opaque white layer on top of them. */
             background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
         }
+.tooltip {
+  position: relative;
+  display: inline-block;
+  /*border-bottom: 1px dotted black;*/ /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+ 
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
     </style>
 </head>
 <body>
@@ -298,12 +324,21 @@ $mapImage = $rec->mapImage()
                             </div>
                             <div class="ResearchesLine-researches">
                                 <?php foreach ($player->researches() as $research) { ?>
-                                    <div class="Research">
-                                        
-                                        <img class="Research-img" src="<?= getResearchImage($research) ?>">
-                                        <div class="Research-time"><?= Utils::formatGameTime($research->time) ?></div>
-                                        <!--<div class="Research-name"><?= e($research->name()) ?></div>-->
+                                    
+                                    <div class="tooltip" style="    opacity: 1; z-index: auto; "><!--Research-->
+
+                                          
+                                            <img class="Research-img" src="<?= getResearchImage($research) ?>">
+                                            <div class="Research-time"><?= Utils::formatGameTime($research->time) ?></div>
+                                             <span class="tooltiptext"  ><?= e($research->name()) ?></span>
+ 
+    <!--
+                                            <img  class="Research-img" src="<?= getResearchImage($research) ?>" /> 
+                                          <span class="tooltiptext"><?= e($research->name()) ?></span>
+                                          <div class="Research-name"><?= e($research->name()) ?></div>-->
+
                                     </div>
+
                                 <?php } ?>
                             </div>
                         </div>
@@ -317,7 +352,10 @@ $mapImage = $rec->mapImage()
       <form action = "" method = "POST" enctype = "multipart/form-data">
          <input type = "file" name = "record" />
          <input type = "submit"/>
-            
+            <script type="text/javascript">
+                
+
+            </script>
  
             
       </form>
