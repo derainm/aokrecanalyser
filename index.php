@@ -64,6 +64,13 @@ if (!function_exists('getResearchImage')) {
           }
         return '';
 }
+function ageLogo($nb)
+{
+     $p =   __DIR__ .'/recanalyst/recanalyst/resources/images/researches/'.$nb.'.png';
+     if (is_file($p)) {
+    return ImageManagerStatic::make($p)->encode('data-url');
+    }
+}
 $rec = new RecordedGame($filename);
 
 // In a real app, it's better to save the image using the ->save() method, and
@@ -273,9 +280,14 @@ $mapImage = $rec->mapImage()
                                         <?= e($player->name) ?> <!--<small>(<?= e($player->civName()) ?>)</small>-->
                                     </p>
                                     <ol class="list-unstyled">
+                                        
+                                        <li><img class="Research-img"  src="<?=ageLogo('101');?>" > <?= Utils::formatGameTime($player->feudalTime) ?></li>
+                                        <li><img class="Research-img"  src="<?=ageLogo('102');?>" > <?= Utils::formatGameTime($player->castleTime) ?></li>
+                                        <li><img class="Research-img"  src="<?=ageLogo('103');?>" > <?= Utils::formatGameTime($player->imperialTime) ?></li>
+                                        <!--
                                         <li>Feudal: <?= Utils::formatGameTime($player->feudalTime) ?></li>
                                         <li>Castle: <?= Utils::formatGameTime($player->castleTime) ?></li>
-                                        <li>Imperial: <?= Utils::formatGameTime($player->imperialTime) ?></li>
+                                        <li>Imperial: <?= Utils::formatGameTime($player->imperialTime) ?></li>-->
                                     </ol>
                                 </div>
                             <?php } ?>
@@ -320,7 +332,10 @@ $mapImage = $rec->mapImage()
                         <div class="Researches-line clearfix ResearchesLine u-playerColor"
                             style="background-color: <?= $player->color() ?>">
                             <div class="ResearchesLine-player">
-                                <?= e($player->name) ?>
+                                
+                                <p class="Player-name">
+                                        <?= e($player->name) ?> <!--<small>(<?= e($player->civName()) ?>)</small>-->
+                                    </p>
                             </div>
                             <div class="ResearchesLine-researches">
                                 <?php foreach ($player->researches() as $research) { ?>
